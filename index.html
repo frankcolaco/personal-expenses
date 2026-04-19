@@ -267,17 +267,15 @@ select.form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://
     <div class="filter-chip" onclick="setHistType('income')">💰 Income</div>
   </div>
   <div id="history-list"></div>
-  <div id="export-row" style="margin-top:12px;display:none">
-    <div style="display:flex;gap:8px">
-      <button class="btn btn-ghost" onclick="exportCSV()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4-4 4m0 0-4-4m4 4V4"/></svg>
-        Export
-      </button>
-      <button class="btn btn-ghost" onclick="openImportCSV()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-        Import
-      </button>
-    </div>
+  <div style="margin-top:12px;display:flex;gap:8px">
+    <button class="btn btn-ghost" onclick="exportCSV()" id="export-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4-4 4m0 0-4-4m4 4V4"/></svg>
+      Export
+    </button>
+    <button class="btn btn-ghost" onclick="openImportCSV()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8v12a2 2 0 002 2h12a2 2 0 002-2V8m-4-4V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v4"/></svg>
+      + Import CSV
+    </button>
   </div>
 </div>
 
@@ -681,7 +679,6 @@ function renderHistory(){
   
   document.getElementById('hist-count-label').textContent=`${filtered.length} transaction${filtered.length!==1?'s':''} · Income: ${fmt(incomeTotal)} · Expense: ${fmt(expenseTotal)}`;
   document.getElementById('history-list').innerHTML=filtered.length?filtered.map(e=>itemHTML(e)).join(''):'<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-text">No transactions</div></div>';
-  document.getElementById('export-row').style.display=expenses.length?'block':'none';
 }
 
 function setHistType(t){
